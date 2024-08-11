@@ -1,0 +1,142 @@
+{
+  "name": "something-for-console",
+  "displayName": "Something for Console",
+  "version": "0.3.5",
+  "packageManager": "pnpm@6.32.11",
+  "description": "Quickly create console debugging information for multiple languages.",
+  "keywords": [],
+  "license": "MIT",
+  "author": "jing_zhen <17710971153@163.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jingzhen0626/something-for-console"
+  },
+  "main": "./dist/index.js",
+  "publisher": "jingzhen0626",
+  "icon": "res/icon.png",
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
+  "homepage": "https://github.com/jingzhen0626/something-for-console#readme",
+  "bugs": {
+    "url": "https://github.com/jingzhen0626/something-for-console/issues"
+  },
+  "engines": {
+    "vscode": "^1.65.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:something-for-console.wrapper",
+    "onCommand:something-for-console.wrapper.before",
+    "onCommand:something-for-console.wrapper.remove"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "title": "Insert debugger statements on after",
+        "command": "something-for-console.wrapper",
+        "when": "editorTextFocus && !editorReadonly"
+      },
+      {
+        "title": "Insert debugger statements on before",
+        "command": "something-for-console.wrapper.before",
+        "when": "editorTextFocus && !editorReadonly"
+      },
+      {
+        "title": "Remove all debugger statements",
+        "command": "something-for-console.wrapper.remove",
+        "when": "editorTextFocus && !editorReadonly"
+      }
+    ],
+    "keybindings": [
+      {
+        "key": "ctrl+shift+down",
+        "command": "something-for-console.wrapper",
+        "when": "editorTextFocus && !editorReadonly"
+      },
+      {
+        "key": "ctrl+shift+up",
+        "command": "something-for-console.wrapper.before",
+        "when": "editorTextFocus && !editorReadonly"
+      },
+      {
+        "key": "ctrl+shift+backspace",
+        "command": "something-for-console.wrapper.remove",
+        "when": "editorTextFocus && !editorReadonly"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "group": "navigation",
+          "command": "something-for-console.wrapper",
+          "when": "editorTextFocus && !editorReadonly"
+        },
+        {
+          "group": "navigation",
+          "command": "something-for-console.wrapper.before",
+          "when": "editorTextFocus && !editorReadonly"
+        },
+        {
+          "group": "navigation",
+          "command": "something-for-console.wrapper.remove",
+          "when": "editorTextFocus && !editorReadonly"
+        }
+      ]
+    },
+    "configuration": {
+      "type": "object",
+      "title": "Debugger languages wrappers",
+      "properties": {
+        "something-for-console.autoSave": {
+          "type": "boolean",
+          "default": false,
+          "description": "Save the file after insert debugger statements."
+        },
+        "something-for-console.wrappers": {
+          "type": "object",
+          "description": "设置在不同语言的情况下创建的调试语句，可自行设定打印内容;\n使用 %s 来设置填充打印信息，如: console.log({ '%s': $text })\n可使用 `$line` 获取变量原始行号, `$text` 获取打印内容",
+          "default": {
+            "php": "var_dump($text);",
+            "go": "fmt.Println(\"line number: $line, %s\", $text)",
+            "csharp": "Console.Log(\"line number: $line, %s\", $text);",
+            "javascript": "console.log(\"line number: $line, %s\", $text)",
+            "typescript": "console.log(\"line number: $line, %s\", $text)",
+            "typescriptreact": "console.log(\"line number: $line, %s\", $text)",
+            "javascriptreact": "console.log(\"line number: $line, %s\", $text)",
+            "default": "console.log('line number: $line, %s', $text)"
+          }
+        }
+      }
+    }
+  },
+  "scripts": {
+    "build": "tsup src/index.ts --external vscode",
+    "dev": "nr build --watch",
+    "lint": "eslint . --fix",
+    "vscode:prepublish": "nr build",
+    "publish": "vsce publish --no-dependencies --allow-star-activation",
+    "pack": "vsce package --no-dependencies --allow-star-activation",
+    "test": "vitest",
+    "typecheck": "tsc --noEmit",
+    "release": "bumpp --commit --push --tag && nr publish"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^0.23.0",
+    "@antfu/ni": "^0.16.2",
+    "@babel/types": "^7.17.10",
+    "@types/node": "^17.0.32",
+    "@types/vscode": "1.65.0",
+    "bumpp": "^7.1.1",
+    "eslint": "^8.15.0",
+    "esno": "^0.14.1",
+    "pnpm": "^6.32.11",
+    "rimraf": "^3.0.2",
+    "tsup": "^5.12.1",
+    "typescript": "^4.6.4",
+    "vsce": "^2.7.0"
+  }
+}
