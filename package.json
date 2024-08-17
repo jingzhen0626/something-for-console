@@ -1,8 +1,7 @@
 {
   "name": "something-for-console",
   "displayName": "Something for Console",
-  "version": "0.3.5",
-  "packageManager": "pnpm@6.32.11",
+  "version": "0.3.6",
   "description": "Quickly create console debugging information for multiple languages.",
   "keywords": [],
   "license": "MIT",
@@ -115,7 +114,7 @@
   },
   "scripts": {
     "build": "tsup src/index.ts --external vscode",
-    "dev": "nr build --watch",
+    "dev": "tsup src/index.ts --external vscode --watch",
     "lint": "eslint . --fix",
     "vscode:prepublish": "nr build",
     "publish": "vsce publish --no-dependencies --allow-star-activation",
@@ -125,18 +124,20 @@
     "release": "bumpp --commit --push --tag && nr publish"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.23.0",
-    "@antfu/ni": "^0.16.2",
-    "@babel/types": "^7.17.10",
-    "@types/node": "^17.0.32",
+    "@antfu/eslint-config": "0.23.0",
+    "@antfu/ni": "0.16.2",
+    "@babel/types": "7.17.10",
+    "@types/node": "17.0.32",
     "@types/vscode": "1.65.0",
-    "bumpp": "^7.1.1",
-    "eslint": "^8.15.0",
-    "esno": "^0.14.1",
-    "pnpm": "^6.32.11",
-    "rimraf": "^3.0.2",
-    "tsup": "^5.12.1",
-    "typescript": "^4.6.4",
-    "vsce": "^2.7.0"
+    "bumpp": "7.1.1",
+    "eslint": "8.15.0",
+    "esno": "0.14.1",
+    "rimraf": "3.0.2",
+    "tsup": "5.12.1",
+    "typescript": "4.6.4",
+    "vsce": "2.7.0"
+  },
+  "volta": {
+    "node": "18.2.0"
   }
 }
