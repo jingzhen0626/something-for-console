@@ -1,3 +1,8 @@
+/*
+ * @Auth: jing
+ * @Date: 2022-11-24 09:47:53
+ * @LastEditors: jing
+ */
 import { workspace } from 'vscode'
 import type { TextDocument } from 'vscode'
 import type { Configurations, InsertPosition, WrapperContentParams } from './types'
@@ -31,9 +36,9 @@ export function getInsertTextByLanguage({ document, text, indents, lineNumber }:
   const content = text.trim().replace(/\r\n/g, ',')
 
   return `${indents}${statement
-    .replace(/%s/gu, content.replace(/(\"|'|`)/gu, '\\$1'))
-    .replace(/\$line/gu, `${lineNumber + 1}`)
-    .replace(/\$text/gu, content)
+    .replace(/%s/g, content.replace(/(\"|'|`)/g, '\\$1'))
+    .replace(/\$line/g, `${lineNumber + 1}`)
+    .replace(/\$text/g, content)
   }\r\n`
 }
 

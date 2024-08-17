@@ -45,7 +45,7 @@ function getDebuggerStatementByLanguage(document) {
 function getInsertTextByLanguage({ document, text, indents, lineNumber }) {
   const statement = getDebuggerStatementByLanguage(document);
   const content = text.trim().replace(/\r\n/g, ",");
-  return `${indents}${statement.replace(/%s/gu, content.replace(/(\"|'|`)/gu, "\\$1")).replace(/\$line/gu, `${lineNumber + 1}`).replace(/\$text/gu, content)}\r
+  return `${indents}${statement.replace(/%s/g, content.replace(/(\"|'|`)/g, "\\$1")).replace(/\$line/g, `${lineNumber + 1}`).replace(/\$text/g, content)}\r
 `;
 }
 function getTargetLineByLineNumber(document, lineNumber, arrow) {
